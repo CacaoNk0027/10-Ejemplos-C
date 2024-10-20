@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\mingw32\\include"
+                "${workspaceFolder}/archivos/graphics.h"
             ],
             "defines": [
                 "_DEBUG",

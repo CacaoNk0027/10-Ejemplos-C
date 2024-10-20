@@ -52,10 +52,14 @@ Una vez instalado selecciona el apartado extensiones en la barra lateral de la i
 
 ![imagen de referencia](./archivos/imagenes/p5.png)
 
-Finalmente buscaremos la opcion `Executor Map` y presionaremos en Editar settings.json, nos saltara un archivo json en el editor, dentro de este buscaremos la siguente linea:\
-`"cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"`\
-la cual remmplazaremos por lo siguente:\
-`"cpp": "g++ '$dirWithoutTrailingSlash\\$fileName' -o '$workspaceRoot\\$fileNameWithoutExt' && start cmd \"/k ; $workspaceRoot\\$fileNameWithoutExt & echo. & pause & exit\" && exit"`\
+Finalmente buscaremos la opcion `Executor Map` y presionaremos en Editar settings.json, nos saltara un archivo json en el editor, dentro de este buscaremos la siguente linea:
+```json
+"cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+```
+la cual remmplazaremos por lo siguente:
+```json
+"cpp": "g++ '$dirWithoutTrailingSlash\\$fileName' -o '$workspaceRoot\\$fileNameWithoutExt' && start cmd \"/k ; $workspaceRoot\\$fileNameWithoutExt & echo. & pause & exit\" && exit"
+```
 De modo que quede algo parecido a esto:
 
 ![imagen de referencia](./archivos/imagenes/p6.png)
@@ -63,3 +67,91 @@ De modo que quede algo parecido a esto:
 Guarda todo con `Ctrl` + `S` y unicamente tendras que presionar `Ctrl` + `Alt` + `N` para correr el codigo o presionar el boton de ejecutar en la parte superior derecha de la ventana
 
 ![imagen de referencia](./archivos/imagenes/p7.png)
+
+## Configurar Graphics
+
+Graphics.h es una libreria que te ofrece una interfaz grafica, para hacer uso de la misma se necesita estar programando sobre 32 bits.\
+En este repositorio te deje los unicos archivos necesarios para tener el modo grafico, los puedes encontrar sobre `10-ejemplos-C/archivos/graphics.h`
+
+### Graphics en Dev-C++
+
+Para configurar graphics.h en Dev-C++ lo primero sera descargar los archivos de la libreria que previamente se dijeron.\
+Proximo a ello nos dirigiremos a la ruta donde descargamos dev-c++ (comunmente es `C:\Program Files (x86)\Dev-Cpp`).\
+Una vez dentro ubicaremos las siguentes carpetas:
+
+* [1] `C:\Program Files (x86)\Dev-Cpp\Templates`
+  * Dentro de esta carpeta pegaremos los archivos `6-ConsoleAppGraphics.template` y `ConsoleApp_cpp_graph.txt`
+* [2] `C:\Program Files (x86)\Dev-Cpp\MinGW64\include`
+* [3] `C:\Program Files (x86)\Dev-Cpp\MinGW64\x86_64-w64-mingw32\include`
+  * en estas dos rutas pegaremos los archivos que terminan en extension `.h` (graphics.h y winbgim.h)
+* [4] `C:\Program Files (x86)\Dev-Cpp\MinGW64\lib`
+* [5] `C:\Program Files (x86)\Dev-Cpp\MinGW64\x86_64-w64-mingw32\lib`
+* [6] `C:\Program Files (x86)\Dev-Cpp\MinGW64\x86_64-w64-mingw32\lib32`
+  * En estas tres ultimas pegaremos el archivo `libbgi.a`
+
+Hecho esto abriremos la IDE.\
+Dentro de la misma seleccionaremos en la barra superior que compilador queremos usar, en este caso sera el de 32 bits.
+
+![imagen de referencia](./archivos/imagenes/p9.png)
+
+Hecho esto entraremos en el apartado herramientas y seleccionaremos la opcion `Opciones del compilador` en el cual tendremos que escribir las siguentes instrucciones en el apartado `Añadir estos comandos a la linea de comandos`.\
+Comandos:
+```
+-static-libgcc -lbgi -lgdi32 -luuid -loleaut32 -lole32
+```
+
+nos quedara como lo muestra la imagen de abajo, hecho esto daremos en aceptar
+
+![imagen de referencia](./archivos/imagenes/p10.png)
+
+Con esto tendremos configurado el modo grafico, para la prueba ejecuta el ejemplo `holamundo_graphics.cpp` del repositorio.
+
+### Graphics en Visual Studio Code
+
+Al igual que con Dev-C++, para configurar graphics.h en VSCode lo primero sera descargar los archivos de la libreria que previamente se dijeron, y proximo a ello, nos dirigiremos a la carpeta donde previamente extrajimos mingw32.\
+Una vez dentro ubicaremos las siguentes carpetas:
+
+* [1] `C:\mingw32\include`
+* [2] `C:\mingw32\i686-w64-mingw32\include`
+  * en estas dos rutas pegaremos los archivos que terminan en extension `.h` (graphics.h y winbgim.h)
+* [3] `C:\mingw32\lib`
+* [4] `C:\mingw32\i686-w64-mingw32\lib`
+  * En estas ultimas pegaremos el archivo `libbgi.a`
+
+Hecho esto pasaremos a las configuraciones de la extension `Code Runner` en donde abriremos el settings.json del apartado `Executor Map`.
+
+Hecho esto remplazaremos la linea que sustituimos anteriormente por la siguente
+```json
+"cpp": "g++ '$dirWithoutTrailingSlash\\$fileName' -o '$workspaceRoot\\$fileNameWithoutExt' -loleaut32 -lole32 -lbgi -lgdi32 -luuid && start cmd \"/k ; $workspaceRoot\\$fileNameWithoutExt & echo. & pause & exit\" && exit"
+```
+
+Hecho eso guardaremos los cambios y ya podremos ejecutar el modo grafico sobre Visual Studio Code.
+
+#### Posible Error
+
+Uno de los posibles errores al momento de querer importar la libreria graphics es que nos aparezca que no se puede abrir el archivo para importar la cabecera.\
+Para solucionarlo mantendremos nuestro cursor en el error hasta que aparezca la opcion `Correccion Rapida` o podemos picar sobre la linea y presionar `Ctrl` + `.`\
+Se nos desplegara el siguente cuadro en el cual seleccionaremos la opcion marcada:
+
+![imagen de referencia](./archivos/imagenes/p11.png)
+
+Dentro de las configuraciones buscaremos el apartado `Ruta de acceso de inclusión` en el cual tendremos un cuadro que por defecto tendra escrito `${workspaceFolder}/`. Borraremos lo que tiene escrito y pegaremos la ruta a las librerias de mingw32 `C:\mingw32\include`.
+
+Al hacer esto se debio crear una carpeta llamada .vscode con un archivo llamado `c_cpp_properties.json` accede a este archivo y corrobora que en el apartado `includePath` se encuentre la ruta que pegamos.\
+En caso de que no lo este, remplaza lo que se encuentre ahi por la ruta que copiamos, de modo que quede de esta manera:
+```json
+"includePath": [
+    "C:\\mingw32\\include"
+],
+```
+Hecho esto guardamos los cambios y el error deberia estar resuelto.
+
+## Conclusiones
+
+Ninguna, solo decir que si tienes algun error me lo comentes por alguno de los medios mencionados en [mi pagina web](https://www.nekoapi.line.pm/) (a exepcion de twitch o youtube), incluso por medio de aqui, github. Esto ayudaria a las personas que pueden tener tu mismo error.
+
+Sin mas que decir
+
+**Gracias**
+
+Att. Kmz Kuro - @CacaoNk0027 
