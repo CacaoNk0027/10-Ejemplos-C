@@ -14,8 +14,10 @@ Esto es muy intuitivo, solo te dare el link directo a la descarga => [Justo aqui
 > Segundo paso: instala MinGW64.
 
 Este contiene GCC el cual es el compilador de c y c++
-Para instalarlo puedes visitar https://winlibs.com/ y en la parte donde vienen las descargas instalar el zip correspondiente.
+Para instalarlo puedes visitar https://winlibs.com/ y en la parte donde vienen las descargas instalar el zip correspondiente dependiendo de tu sistema.
+
+![Imagen de referencia](./archivos/p1.png)
 
 Una vez hayas descargado el zip tendras que extraer la carpeta que se encuentra dentro del zip en tu unidad **C**, de modo que quede **c:/mingw64**.
 
-Una vez haya finalizado la instalación ejecuta Visual Studio Code y en la parte de extensiones busca **Code Runner**
+![Imagen de referencia](./archivos/p2.png)
