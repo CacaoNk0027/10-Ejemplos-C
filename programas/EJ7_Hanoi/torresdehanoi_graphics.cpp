@@ -1,6 +1,6 @@
 /**
  * @file torresdehanoi_graphics.cpp
- * @author Kmz Kuro (https://www.nekoapi.line.pm/)
+ * @author Kmz Kuro (https://www.nekoapi.work.gd/)
  * @version 0.1
  * @date 2024-10-20
  * Ejemplo sobre el juego de las torres de hanoi, haciendo uso de 3 dicos

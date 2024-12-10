@@ -148,7 +148,7 @@ Hecho esto guardamos los cambios y el error deberia estar resuelto.
 
 ## Conclusiones
 
-Ninguna, solo decir que si tienes algun error me lo comentes por alguno de los medios mencionados en [mi pagina web](https://www.nekoapi.line.pm/) (a exepcion de twitch o youtube), incluso por medio de aqui, github. Esto ayudaria a las personas que pueden tener tu mismo error.
+Ninguna, solo decir que si tienes algun error me lo comentes por alguno de los medios mencionados en [mi pagina web](https://www.nekoapi.work.gd/) (a exepcion de twitch o youtube), incluso por medio de aqui, github. Esto ayudaria a las personas que pueden tener tu mismo error.
 
 Sin mas que decir
 

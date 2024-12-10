@@ -1,6 +1,6 @@
 /**
  * @file tiposysalidas.cpp
- * @author Kmz Kuro (https://www.nekoapi.line.pm/)
+ * @author Kmz Kuro (https://www.nekoapi.work.gd/)
  * @version 0.1
  * @date 2024-10-20
  * Este ejemplo muestra todo lo basico de C

@@ -1,6 +1,6 @@
 /**
  * @file holamundo_graphics.cpp
- * @author Kmz Kuro (https://www.nekoapi.line.pm/)
+ * @author Kmz Kuro (https://www.nekoapi.work.gd/)
  * @version 0.1
  * @date 2024-10-20
  * Este ejemplo enseña a como iniciar el modo grafico y como imprimir un texto en el mismo
